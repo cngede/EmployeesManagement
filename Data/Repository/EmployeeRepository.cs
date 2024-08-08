@@ -1,4 +1,4 @@
-﻿using EmployeesManagement.Data.Interface;
+using EmployeesManagement.Data.Interface;
 using EmployeesManagement.Models;
 
 namespace EmployeesManagement.Data.Repository
@@ -9,62 +9,146 @@ namespace EmployeesManagement.Data.Repository
     public class EmployeeRepository : IEmployeeRepository
     {
 
-        private readonly ApplicationDbContext _appContext;
+        public ApplicationDbContext AppContext { get; }
 
         public EmployeeRepository(ApplicationDbContext dataContext)
         {
-            _appContext = dataContext;
+            AppContext = dataContext;
         }
 
         public bool AddEmployee(Employee employee)
         {
-            if (_appContext.Employees == null)
+            if (AppContext.Employees == null)
                 return false;
 
-            if (_appContext.Employees.Any(x => x.Id == employee.Id)) { return false; }
+            if (AppContext.Employees.Any(x => x.Id == employee.Id)) { return false; }
 
-            _appContext.Employees.Add(employee);
-            _appContext.SaveChanges();
+            AppContext.Employees.Add(employee);
+            Save();
             return true;
         }
 
         public bool DeleteEmployee(Employee employee)
         {
-            if (_appContext.Employees == null)
+            if (AppContext.Employees == null)
                 return false;
 
-            if (!_appContext.Employees.Any(x => x.Id == employee.Id)) { return false; }
+            if (!AppContext.Employees.Any(x => x.Id == employee.Id)) { return false; }
 
-            _appContext.Employees.Remove(employee);
-            _appContext.SaveChanges();
+            AppContext.Employees.Remove(employee);
+            AppContext.SaveChanges();
             return true;
         }
 
-        public Employee GetEmployeeById(int id)
+        public async Task <Employee?> GetEmployeesByEmpNo(string? EmpNo)
         {
-            if (_appContext.Employees == null)
+            if (AppContext.Employees == null)
                 return null;
 
-            return _appContext.Employees.FirstOrDefault(x => x.Id == id);
+            return AppContext.Employees.FirstOrDefault(x => x.EmpNo == EmpNo);
         }
 
-        public IList<Employee> GetEmployees()
+        public async Task<Employee?> GetEmployeesByAddress(string Address)
         {
-            if (_appContext.Employees == null)
+            if (AppContext.Employees == null)
+                return null;
+
+            return AppContext.Employees.FirstOrDefault(x => x.Address == Address);
+        }
+
+        public async Task<Employee?> GetEmployeesByDateOfBirth(DateTime DateOfBirth)
+        {
+            if (AppContext.Employees == null)
+                return null;
+
+            return AppContext.Employees.FirstOrDefault(x => x.DateOfBirth == DateOfBirth);
+        }
+
+
+        public async Task<Employee?> GetEmployeesByDepartment(string Department)
+        {
+            if (AppContext.Employees == null)
+                return null;
+
+            return AppContext.Employees.FirstOrDefault(x => x.Department == Department);
+        }
+
+
+        public async Task<Employee?> GetEmployeesByEmail(string Email)
+        {
+            if (AppContext.Employees == null)
+                return null;
+
+            return AppContext.Employees.FirstOrDefault(x => x.Email == Email);
+        }
+
+
+
+        public async Task<Employee?> GetEmployeesByFirstName(string FirstName)
+        {
+            if (AppContext.Employees == null)
+                return null;
+
+            return AppContext.Employees.FirstOrDefault(x => x.FirstName == FirstName);
+        }
+
+
+
+        public async Task<Employee?> GetEmployeesByLastName(string LastName)
+        {
+            if (AppContext.Employees == null)
+                return null;
+
+            return AppContext.Employees.FirstOrDefault(x => x.LastName == LastName);
+        }
+
+
+        public async Task<Employee?> GetEmployeesByPhone(string Phone)
+        {
+            if (AppContext.Employees == null)
+                return null;
+
+            return AppContext.Employees.FirstOrDefault(x => x.Phone == Phone);
+        }
+
+
+
+        //public async Task<Employee?> CreateEmployee(Employee employee)
+        //{
+        //    if (AppContext.Employees == null)
+        //        return new List<Employee();
+
+        //    return AppContext.Employees.ToList();
+        //}
+
+
+
+        public void Save()
+        {
+            AppContext.SaveChanges();
+        }
+
+
+
+
+
+        public async Task<IEnumerable<Employee>> GetAllEmployees()
+        {
+            if (AppContext.Employees == null)
                 return new List<Employee>();
 
-            return _appContext.Employees.ToList();
+            return AppContext.Employees.ToList();
         }
 
         public bool UpdateEmployee(Employee employee)
         {
-            if (_appContext.Employees == null)
+            if (AppContext.Employees == null)
                 return false;
 
-            if (!_appContext.Employees.Any(x => x.Id == employee.Id)) { return false; }
+            if (!AppContext.Employees.Any(x => x.Id == employee.Id)) { return false; }
 
-            _appContext.Employees.Update(employee);
-            _appContext.SaveChanges();
+            AppContext.Employees.Update(employee);
+            AppContext.SaveChanges();
             return true;
         }
     }
