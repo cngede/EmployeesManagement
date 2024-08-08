@@ -1,35 +1,35 @@
-﻿using EmployeesManagement.Models;
+using EmployeesManagement.Models;
 using Mono.TextTemplating;
 
 namespace EmployeesManagement.Data.Interface
 {
     public interface IEmployeeRepository
     {
-        public interface IEmployeeRepository
-        {
+           // ApplicationDbContext AppContext { get; }
 
+             ICollection<Employee> Employees();
 
             Task<IEnumerable<Employee>> GetAllEmployees();
 
-            Task<IEnumerable<Employee>> GetSliceAsync(int offset, int size);
-            Task<IEnumerable<Employee>> GetEmployeesByEmpNo(string empno);
+            
+            Task<Employee?> GetEmployeesByEmpNo(string empno);
 
-            Task<IEnumerable<Employee>> GetEmployeesByFirstName(string firstname);
-            Task<IEnumerable<Employee>> GetEmployeesByLastName(string lastname);
-            Task<IEnumerable<Employee>> GetEmployeesByEmail(string email);
-            Task<IEnumerable<Employee>> GetEmployeesByPhone(string phone);
-            Task<IEnumerable<Employee>> GetEmployeesByAddress(string address);
-            Task<IEnumerable<Employee>> GetEmployeesByDateOfBirth(string dateofbirth);
-            Task<IEnumerable<Employee>> GetEmployeesByDepartment(string department);
+            Task<Employee?> GetEmployeesByFirstName(string firstname);
+            Task<Employee?> GetEmployeesByLastName(string lastname);
+            Task<Employee?> GetEmployeesByEmail(string email);
+            Task<Employee?> GetEmployeesByPhone(string phone);
+            Task<Employee?> GetEmployeesByAddress(string address);
+            Task<Employee?> GetEmployeesByDateOfBirth(DateTime dateOfBirth);
+            Task<Employee?> GetEmployeesByDepartment(string department);
 
-            bool Add(Employee employee);
+            bool AddEmployee(Employee employee);
+            bool CreateEmployee(Employee employee);
 
-            bool Update(Employee employee);
+            bool UpdateEmployee(Employee employee);
 
-            bool Delete(Employee employee);
+            bool DeleteEmployee(Employee employee);
 
-            bool Save();
-        }
+            void Save();
     }
 
 }
