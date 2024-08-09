@@ -3,14 +3,14 @@ using Mono.TextTemplating;
 
 namespace EmployeesManagement.Data.Interface
 {
+    
+    //Using Interface Segregation Principle here where the methods are defined but implemented in the EmployeeRepository class.
     public interface IEmployeeRepository
     {
             ApplicationDbContext AppContext { get; }
 
              
-
             Task<IEnumerable<Employee>> GetAllEmployees();
-
             
             Task<Employee?> GetEmployeesByEmpNo(string empno);
 
