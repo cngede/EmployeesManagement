@@ -5,7 +5,9 @@ namespace EmployeesManagement.Data.Repository
 {
 
 
-
+    // Implementing the IEmployeeRepository in the EmployeeReppsitory class.
+    // And providing implementations for the different methods - Interface Segregation Principle.
+   
     public class EmployeeRepository : IEmployeeRepository
     {
 
