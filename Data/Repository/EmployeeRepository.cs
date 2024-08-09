@@ -83,7 +83,6 @@ namespace EmployeesManagement.Data.Repository
         }
 
 
-
         public async Task<Employee?> GetEmployeesByFirstName(string FirstName)
         {
             if (AppContext.Employees == null)
@@ -91,7 +90,6 @@ namespace EmployeesManagement.Data.Repository
 
             return AppContext.Employees.FirstOrDefault(x => x.FirstName == FirstName);
         }
-
 
 
         public async Task<Employee?> GetEmployeesByLastName(string LastName)
@@ -112,24 +110,10 @@ namespace EmployeesManagement.Data.Repository
         }
 
 
-
-        //public async Task<Employee?> CreateEmployee(Employee employee)
-        //{
-        //    if (AppContext.Employees == null)
-        //        return new List<Employee();
-
-        //    return AppContext.Employees.ToList();
-        //}
-
-
-
         public void Save()
         {
             AppContext.SaveChanges();
         }
-
-
-
 
 
         public async Task<IEnumerable<Employee>> GetAllEmployees()
