@@ -5,9 +5,9 @@ namespace EmployeesManagement.Data.Interface
 {
     public interface IEmployeeRepository
     {
-           // ApplicationDbContext AppContext { get; }
+            ApplicationDbContext AppContext { get; }
 
-             ICollection<Employee> Employees();
+             
 
             Task<IEnumerable<Employee>> GetAllEmployees();
 
@@ -23,8 +23,6 @@ namespace EmployeesManagement.Data.Interface
             Task<Employee?> GetEmployeesByDepartment(string department);
 
             bool AddEmployee(Employee employee);
-            bool CreateEmployee(Employee employee);
-
             bool UpdateEmployee(Employee employee);
 
             bool DeleteEmployee(Employee employee);
